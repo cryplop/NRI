@@ -1,0 +1,10 @@
+@startuml
+:Игрок: as Player
+Player -up-> (Создать персонажа)
+Player -left-> (Управлять инвентарем)
+Player -left-> (Развивать таланты)
+Player -right-> (Фиксировать интересные места на карте)
+Player -down-> (Построить город)
+Player -down-> (Управлять экономикой города)
+Player -right-> (Запоминать легенды)
+@enduml

@@ -1,0 +1,162 @@
+@startuml
+
+entity "Атриубты персонажа" as AttrPerson {
+    * id
+    --
+    idPerson
+    idAttr
+    --
+    value
+    date
+}
+entity "Атриубты" as Attr{
+    * id
+    --
+    name
+}
+entity "Навыки персонажа" as SkillsPerson {
+    * id
+    --
+    idPerson
+    idSkill
+    --
+    value
+    date
+}
+entity "Навыки" as Skills{
+    * id
+    --
+    idAttr
+    --
+    name
+}
+entity "Гордость" as Pride {
+    * id
+    --
+    idPerson
+    --
+    pride
+    date
+    lost
+}
+entity "Тёмный секрет" as Secret {
+    * id
+    --
+    idPerson
+    --
+    Secret
+    date
+}
+
+entity "Таланты персонажа" as TalentPerson {
+    * id
+    --
+    idPerson
+    idRang
+    --
+    rang
+    date
+}
+entity "Таланты" as Talent {
+    * id
+    --
+    name
+    description
+}
+entity "Ранги таланта" as RangTalent {
+    * id
+    --
+    idTalant
+    --
+    rang
+    description
+}
+entity "Рассы" as Race {
+    * id
+    --
+    **id_Talant**
+    --
+    name
+    **description**
+}
+entity "Детство" as Childhood {
+    * id
+    --
+    **id_Race**
+    --
+    name
+    **Attr : json**
+    **Skils : json**
+}
+entity "Поворотное событие" as TurningPoint {
+    * id
+    --
+    name
+}
+
+entity "Поворотное событие персонажа" as TurningPointPerson {
+    * id
+    --
+    id_Person
+    id_TurningPoint
+    --
+    name
+    id_Talant
+    description
+    things
+}
+
+entity "Персонаж" as Person {
+    * id
+    --
+    id_Race
+    id_Childhood
+    id_Archetype
+    --
+    name
+    age
+    birthday
+    **experience**
+}
+
+entity "Архетип" as Archetype {
+    *id
+    --
+    name
+    key_attr
+    key_skills
+    start_things
+    start_resources
+}
+
+entity "Таланты архетипа" as TalantArchetype {
+    *id
+    --
+    id_Talant
+    id_Archetype
+}
+
+
+Person  ||--|{ TurningPointPerson
+TurningPoint  ||--|{ TurningPointPerson
+
+Person  ||--|| Race
+Person  ||--|| Archetype
+Person  ||--|| Childhood
+Person  ||--|{ AttrPerson
+Person  ||--|{ SkillsPerson
+Skills  ||--|{ SkillsPerson
+Person  ||--o{ Pride
+Person  ||--o{ Secret
+Attr  ||--|{ Skills
+Attr  ||--|{ AttrPerson
+Person  ||--|{ TalentPerson
+Talent ||--|{ Race
+Childhood ||--|{ Race
+Talent ||--|{ RangTalent
+TalentPerson }o--|| RangTalent
+
+Talent ||--|{ TalantArchetype
+Talent ||--|{ TurningPointPerson
+Archetype ||--|{ TalantArchetype
+@enduml
