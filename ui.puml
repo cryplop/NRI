@@ -1,0 +1,10 @@
+@startuml
+hide empty description
+[*] --> Main
+Main --> [*]
+Main : Главная страница
+Main : приложения
+Main -> Step1
+
+Step1 --> [*]
+@enduml
